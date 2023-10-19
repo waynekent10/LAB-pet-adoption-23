@@ -241,26 +241,38 @@ const pets = [
     }
   ];
 
-  // TARGETING ELEMENTS ON THE DOM
-// To target, we will use the querySelector method and pass it the selector, 
-// which in this case is an id with the value of "app"
-  const app = document.querySelector("#app")
 
-let domString = "";
+  const renderToDom = (pets) => {
+    let domString = "";  
+    pets.forEach((pet) => {
+      domString += `<div class="card" style="width: 18rem;">
+      <img src="${pet.imageUrl}" class="card-img-top" alt="${pet.name}">
+      <div class="card-body">
+        <h5 class="card-title">${pet.name}</h5>
+        <p class="card-text">${pet.specialSkill} ${pet.color} ${pet.type}</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>`;
+      })
 
-
-for (pet of pets) {
-
-  domString += `<div class="card" style="width: 18rem;">
-  <img src="${pet.imageUrl}" class="card-img-top" alt="${pet.name}">
-  <div class="card-body">
-    <h5 class="card-title">${pet.name}</h5>
-    <p class="card-text">${pet.specialSkill} ${pet.color} ${pet.type}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>`;
-};
+      const app = document.querySelector("#app")
+       app.innerHTML = domString
+   }
 
 
-  
-  app.innerHTML = domString
+ renderToDom(pets);
+
+ const showDinos = document.querySelector("#dino")
+
+ const filter = () => {
+   let petsArray = [];
+
+   for (let pet of pets) {
+     if (pets.type === true) {
+        petsArray.push(pets);
+     }
+ }
+   renderToDom(petsArray)
+ } 
+
+ showDinos.addEventListener('click', filter)
