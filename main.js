@@ -242,22 +242,28 @@ const pets = [
   ];
 
 
+
+// Function to render cards to DOM that takes an array
   const renderToDom = (pets) => {
-    let domString = "";  
+    //Create our domstring so we can push cards to it
+    let domString = ""
+    // Loop over the array and creat our pie cards  
     for ( let pet of pets) {
       domString += `<div class="card" style="width: 18rem;">
       <img src="${pet.imageUrl}" class="card-img-top" alt="${pet.name}">
       <div class="card-body">
         <h5 class="card-title">${pet.name}</h5>
         <p class="card-text">${pet.specialSkill} ${pet.color} ${pet.type}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <button class="btn btn-danger" id="delete--${pet.id}">Delete</button>
       </div>
     </div>`;
       }
+            // Select our HTML div
+            const app = document.querySelector("#app") 
 
-      const app = document.querySelector("#app")
-       app.innerHTML = domString
-   }
+        //Set the cards to the div's inner HTML
+           app.innerHTML = domString
+    };
 
 //Rendertodom funtion makes pets the variable
  renderToDom(pets);
@@ -308,3 +314,41 @@ showAllPetsButton.addEventListener('click', () => handleFilterClick("all"));
 //  showAllPetsButton.addEventListener('click', () => {
 //   renderToDom(pets);
 //  });
+const form = document.querySelector('form');
+
+
+const createPet = (event) => {
+  event.preventDefault()
+
+  const createPet= {
+    id: pets.lenght + 1,
+    name: document.querySelector("#name").value,
+    specialSkill: document.querySelector("#specialSkill").value,
+    color: document.querySelector("#color").value,
+    type: document.querySelector("#type").value,
+    imageUrl: document.querySelector("#imageUrl").value,
+  }
+  pets.push(createPet)
+  //console.log(pets.length)
+  renderToDom(pets)
+  form.reset()
+}
+const events = () => {
+  form.addEventListener('submit', createPet);
+  addPet.addEventListener('click', () => {
+    renderToDom(pets);
+  })
+}
+
+
+
+
+
+app.addEventListener("click", (e) => {
+  if (e.target.id.includes("delete")) {
+    const [, id] = e.target.split("--");
+    const index = pets.findIndex(obj => obj.id === Number(id));
+    pets.splice(index, 1);
+  }
+  renderToDom(pets);
+});
