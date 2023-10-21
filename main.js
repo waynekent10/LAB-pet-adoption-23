@@ -281,6 +281,9 @@ const pets = [
  };
    return petsArray;
  };
+//SIMPLIFIED CODE 
+// THE HANDLECLICK FUNCTION TAKES TYPE AND USES IT AS AN ARGUEMENT
+
   function handleFilterClick(type) {
   const filteredPets = type === "all" ? pets : filter(pets, type);
   renderToDom(filteredPets)
