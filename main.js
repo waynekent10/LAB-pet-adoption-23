@@ -244,7 +244,7 @@ const pets = [
 
   const renderToDom = (pets) => {
     let domString = "";  
-    for ( pet of pets) {
+    for ( let pet of pets) {
       domString += `<div class="card" style="width: 18rem;">
       <img src="${pet.imageUrl}" class="card-img-top" alt="${pet.name}">
       <div class="card-body">
@@ -259,13 +259,16 @@ const pets = [
        app.innerHTML = domString
    }
 
-
+//Rendertodom funtion makes pets the variable
  renderToDom(pets);
 
  const showDinosButton = document.querySelector("#dino")
  const showCatsButton = document.querySelector("#cat")
  const showDogsButton = document.querySelector("#dog")
  const showAllPetsButton = document.querySelector("#allPets")
+
+//filter function that took two inputs oets and the type
+//it creates an array "petsArray" to store the filtered pets
 
  const filter = (array, typeString) => {
  const petsArray = []
@@ -278,19 +281,30 @@ const pets = [
  };
    return petsArray;
  };
+//SIMPLIFIED CODE 
+// THE HANDLECLICK FUNCTION TAKES TYPE AND USES IT AS AN ARGUEMENT
 
- showDinosButton.addEventListener('click', () => {
-  const dinos = filter (pets, "dino");
-  renderToDom(dinos);
- });
- showDogsButton.addEventListener('click', () => {
-  const dogs = filter (pets, "dog");
-  renderToDom(dogs);
- });
- showCatsButton.addEventListener('click', () => {
-  const cats = filter (pets, "cat");
-  renderToDom(cats);
- });
- showAllPetsButton.addEventListener('click', () => {
-  renderToDom(pets);
- });
+  function handleFilterClick(type) {
+  const filteredPets = type === "all" ? pets : filter(pets, type);
+  renderToDom(filteredPets)
+}
+
+showCatsButton.addEventListener('click', () => handleFilterClick("cat"));
+showDinosButton.addEventListener('click', () => handleFilterClick("dino"));
+showDogsButton.addEventListener('click', () => handleFilterClick("dog"));
+showAllPetsButton.addEventListener('click', () => handleFilterClick("all"));
+//  showDinosButton.addEventListener('click', () => {
+//   const dinos = filter (pets, "dino");
+//   renderToDom(dinos);
+//  });
+//  showDogsButton.addEventListener('click', () => {
+//   const dogs = filter (pets, "dog");
+//   renderToDom(dogs);
+//  });
+//  showCatsButton.addEventListener('click', () => {
+//   const cats = filter (pets, "cat");
+//   renderToDom(cats);
+//  });
+//  showAllPetsButton.addEventListener('click', () => {
+//   renderToDom(pets);
+//  });
