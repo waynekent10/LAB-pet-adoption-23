@@ -244,7 +244,7 @@ const pets = [
 
   const renderToDom = (pets) => {
     let domString = "";  
-    pets.forEach((pet) => {
+    for ( pet of pets) {
       domString += `<div class="card" style="width: 18rem;">
       <img src="${pet.imageUrl}" class="card-img-top" alt="${pet.name}">
       <div class="card-body">
@@ -253,7 +253,7 @@ const pets = [
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>`;
-      })
+      }
 
       const app = document.querySelector("#app")
        app.innerHTML = domString
@@ -262,17 +262,25 @@ const pets = [
 
  renderToDom(pets);
 
- const showDinos = document.querySelector("#dino")
+ const showDinosButton = document.querySelector("#dino")
+// const showCatsButton = document.querySelector("#cat")
+// const showDogsButton = document.querySelector("#dog")
+// const showAllButton = document.querySelector("#all-pets")
 
  const filter = () => {
-   let petsArray = [];
 
-   for (let pet of pets) {
-     if (pets.type === true) {
-        petsArray.push(pets);
+   let petsArray = []
+
+   for(const pet of pets){
+
+     if (pet.dino === true){
+        petsArray.push(pet);
      }
  }
    renderToDom(petsArray)
  } 
 
- showDinos.addEventListener('click', filter)
+ showDinosButton.addEventListener('click', filter)
+ //showCatsButton.addEventListener('click', filter)
+ //showDogsButton.addEventListener('click', filter)
+// showAllButton.addEventListener('click', filter)
