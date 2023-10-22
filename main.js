@@ -345,15 +345,18 @@ showAllPetsButton.addEventListener("click", () => handleFilterClick("all"));
 
 
 //creates the form and places the form on the webpage
-const form = document.querySelector("form");
+const form = document.querySelector('form');
+
+
 
 //Creating the pet, when event is used, we can use the data inside the form
 
-const createPet = (event) => {
-  event.preventDefault();
+const createPet = (e) => {
+  console.log("is this working")
+  e.preventDefault();
 
   // getting the information to create
-  const createPet = {
+  const newPetObj = {
     id: pets.lenght + 1,
     name: document.querySelector("#name").value,
     specialSkill: document.querySelector("#specialSkill").value,
@@ -361,23 +364,22 @@ const createPet = (event) => {
     type: document.querySelector("#type").value,
     imageUrl: document.querySelector("#imageUrl").value,
   };
-  pets.push(createPet);
+  pets.push(newPetObj);
   //console.log(pets.length)
   renderToDom(pets);
   form.reset();
 };
-const events = () => {
-  form.addEventListener("submit", createPet);
-  addPet.addEventListener("click", () => {
-    renderToDom(pets);
-  });
-};
 
-app.addEventListener("click", (e) => {
-  if (e.target.id.includes("delete")) {
-    const [, id] = e.target.split("--");
-    const index = pets.findIndex((obj) => obj.id === Number(id));
+form.addEventListener('submit', createPet);
+
+const app = document.querySelector("#app")
+
+const deletePet = (event) => {
+  if(event.target.id.includes("delete")) {
+    const [, id] = event.target.id.split("--");
+    const index = pets.findIndex((obj => obj.id === Number(id)));
     pets.splice(index, 1);
   }
-  renderToDom(pets);
-});
+  renderToDom(pets)
+}
+app.addEventListener("click", deletePet)
