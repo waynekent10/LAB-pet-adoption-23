@@ -1,6 +1,19 @@
 body {
 background-color: black;
+gap: 100px;
 }
-.button-container {
-    justify-content: center;
+
+#app {
+    flex-direction: row, 3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.card{
+    width: 400px;
+    height: auto;
+    margin: 10px;
+    display: flex;
+    border: solid 1px white;
+    row-gap: 3px;
 }
