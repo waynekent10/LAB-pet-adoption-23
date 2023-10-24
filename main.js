@@ -282,7 +282,9 @@ const renderToDom = (pets) => {
       <img src="${pet.imageUrl}" class="card-img-top" alt="${pet.name}">
       <div class="card-body">
         <h5 class="card-title">${pet.name}</h5>
-        <p class="card-text">${pet.specialSkill} ${pet.color} ${pet.type}</p>
+        <p class="card-text">${pet.specialSkill}</p>
+        <section>${pet.color}</section>
+        <footer>${pet.type}</footer>
         <button class="btn btn-danger" id="delete--${pet.id}">Delete</button>
       </div>
     </div>`;
@@ -372,14 +374,26 @@ const createPet = (e) => {
 
 form.addEventListener('submit', createPet);
 
+//selects our HTML div
 const app = document.querySelector("#app")
 
 const deletePet = (event) => {
   if(event.target.id.includes("delete")) {
+    //delete logic
+    //determines which object I will delete by the id
     const [, id] = event.target.id.split("--");
+
+    //Identify where in the array the object is
     const index = pets.findIndex((obj => obj.id === Number(id)));
+    //Removes the object within the array
     pets.splice(index, 1);
   }
   renderToDom(pets)
 }
 app.addEventListener("click", deletePet)
+
+const startApp = () => {
+  renderToDom(pets)
+}
+
+startApp()

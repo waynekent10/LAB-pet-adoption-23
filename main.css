@@ -1,6 +1,6 @@
 body {
 background-color: black;
-gap: 100px;
+gap: 200px;
 }
 
 #app {
@@ -30,7 +30,6 @@ gap: 100px;
     display: flex;
     justify-content: center;
 }
-.addPet{
-    display: flex;
-    gap: 50px;
+#addPet{
+    width: 100px;
 }
